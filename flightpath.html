@@ -26,9 +26,9 @@
     <div id="map"></div>
     <script>
 
-        var map = L.map('map').setView([-14, 145], 4.2);
+        var map = L.map('map').setView([39.82, -98.58], 5);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
+            maxZoom: 4,
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
@@ -41,30 +41,29 @@
             }
         })
 
-        var greenIcon = new LeafIcon({iconUrl: 'Black-Marlin-Hawaii.png'})
+        var Icon = new LeafIcon({iconUrl: 'airplane.png'})
 
-        var geojson = L.geoJson(bm.features[0],{
-            pointToLayer: function(feature,latlng){
-                return L.marker(latlng,{icon: greenIcon})
+        var geojson = L.geoJson(Path.features[0],{
+            pointToLayer: function(feature,coordinates){
+                return L.marker(coordinates,{icon: Icon})
             }
         }).addTo(map);
 
-        function moveSlider(value) { // function called by the slider that uses the value to select one feature, using the index of the feature array. 
-            //console.log(e.value)
-            map.removeLayer(geojson);// leaflet method to remove a layer
-            document.getElementById('daYear').innerHTML = 'Day ' + bm.features[value].properties.date
-            geojson = L.geoJson(bm.features[value],{
-                pointToLayer: function(feature,latlng){
-                    return L.marker(latlng,{icon: greenIcon})
+        function moveSlider(value) {
+            map.removeLayer(geojson);
+            document.getElementById('Minutes').innerHTML = 'Minutes' + Path.features[value].properties.coordinates;
+            geojson = L.geoJson(Path.features[value],{
+                pointToLayer: function(feature,coordinates){
+                    return L.marker(coordinates,{icon: Icon})
                 }
             })
-            map.addLayer(geojson); // add the new layer
+            map.addLayer(geojson); 
             
         }
-        moveSlider(0) // start the map with the first feature
+        moveSlider(0) 
         window.onload = function() {
         document.getElementById('dateSlider').value = 0;  
-    }; // I added this section to make sure that the slider goes back to the first date after refreshing
+    }; 
 
     </script>
 </body>
