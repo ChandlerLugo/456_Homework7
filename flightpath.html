@@ -12,7 +12,7 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin=""></script>
 
-   <script src="Path.js"></script>
+   <script src="Flight.js"></script>
 </head>
 <style>
     #map { 
@@ -21,8 +21,8 @@
          }
 </style>
 <body>
-    <h3 id ="Minutes">Minutes in the Air</h3>
-    <input id="dateSlider" type = "range" name = "Minutes" min = "0" max = "352" oninput="moveSlider(this.value)">
+    <h3 id ="Times">Minutes in the Air</h3>
+    <input id="dateSlider" type = "range" name = "times" min = "0" max = "352" oninput="moveSlider(this.value)">
     <div id="map"></div>
     <script>
 
@@ -43,18 +43,18 @@
 
         var Icon = new LeafIcon({iconUrl: 'airplane.png'})
 
-        var geojson = L.geoJson(Path.features[0],{
-            pointToLayer: function(feature,coordinates){
-                return L.marker(coordinates,{icon: Icon})
+        var geojson = L.geoJson(Flight[0],{
+            pointToLayer: function(times){
+                return L.marker(times,{icon: Icon})
             }
         }).addTo(map);
 
-        function moveSlider(value) {
+        function moveSlider(times) {
             map.removeLayer(geojson);
-            document.getElementById('Minutes').innerHTML = 'Minutes' + Path.features[value].properties.coordinates;
-            geojson = L.geoJson(Path.features[value],{
-                pointToLayer: function(feature,coordinates){
-                    return L.marker(coordinates,{icon: Icon})
+            document.getElementById('Time').innerHTML = 'Time' + Flight.features[0].times;
+            geojson = L.geoJson(Flight.features[value],{
+                pointToLayer: function(times){
+                    return L.marker(times,{icon: Icon})
                 }
             })
             map.addLayer(geojson); 
