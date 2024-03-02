@@ -21,8 +21,8 @@
          }
 </style>
 <body>
-    <h3 id ="Times">Minutes in the Air</h3>
-    <input id="dateSlider" type = "range" name = "times" min = "0" max = "352" oninput="moveSlider(this.value)">
+    <h3 id ="time">Minutes in the Air</h3>
+    <input id="dateSlider" type = "range" name = "time" min = "0" max = "717" oninput="moveSlider(this.time)">
     <div id="map"></div>
     <script>
 
@@ -32,7 +32,7 @@
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-
+        
 
         var LeafIcon = L.Icon.extend({
             options: {
@@ -43,18 +43,18 @@
 
         var Icon = new LeafIcon({iconUrl: 'airplane.png'})
 
-        var geojson = L.geoJson(Flight[0],{
-            pointToLayer: function(times){
-                return L.marker(times,{icon: Icon})
+        var geojson = L.geoJson(track[0],{
+            pointToLayer: function(time){
+                return L.marker(time,{icon: Icon})
             }
         }).addTo(map);
 
-        function moveSlider(times) {
+        function moveSlider(time) {
             map.removeLayer(geojson);
-            document.getElementById('Time').innerHTML = 'Time' + Flight.features[0].times;
-            geojson = L.geoJson(Flight.features[value],{
-                pointToLayer: function(times){
-                    return L.marker(times,{icon: Icon})
+            document.getElementById('time').innerHTML = 'time' + track.features[0].time;
+            geojson = L.geoJson(track.features[time],{
+                pointToLayer: function(time){
+                    return L.marker(time,{icon: Icon})
                 }
             })
             map.addLayer(geojson); 
@@ -62,7 +62,7 @@
         }
         moveSlider(0) 
         window.onload = function() {
-        document.getElementById('dateSlider').value = 0;  
+        document.getElementById('dateSlider').time = 0;  
     }; 
 
     </script>
