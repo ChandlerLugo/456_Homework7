@@ -63,12 +63,10 @@
     
         var selectedYear = 'PopulationDensity1900'
         function myStyle(feature) {
-            // console.log(feature.properties[selectedYear]) //look at the console log and notice that selectedYear is the name of a property of the geojson, so this will give you the data for that feature. 
-            // console.log(getColor(feature.properties[selectedYear])) //look at the console log and notice that the selected year will result in a color. 
-
+           
             return {
             "fillColor": getColor(feature.properties[selectedYear]),
-            "color": "black",// notice that the selected year is the name of a property of the geojson
+            "color": "black",
             "weight": 0.75,
             "opacity": 2.0,
             "fillOpacity": 0.7
